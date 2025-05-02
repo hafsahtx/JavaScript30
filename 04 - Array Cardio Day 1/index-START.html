@@ -38,29 +38,53 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    let fifteen = inventors.filter((person)=>(person.year<1600 && person.year>1499))
+    console.table(fifteen);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    let names = inventors.map((person)=>`${person.first} ${person.last}`)
+    console.log(names)
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-
+    let ordered = inventors.sort((a, b) => a.year - b.year)
+    console.table(ordered);
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
-
+      let total = inventors.reduce((total,cur)=>{return total+ (cur.passed-cur.year)},0)
+      console.log(total);
     // 5. Sort the inventors by years lived
-
+    let age = inventors.sort((a,b)=>(b.passed-b.year)-(a.passed-a.year))
+    console.table(age);
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
-
+      /*const category = document.querySelector(".mw-category.mw-category-columns");
+      const links = Array.from(category.querySelectorAll("a"));
+      const de = links
+                  .map(names=names.textContent)
+                  .filter(streetname=>streetname.includes("de"))  */    
+  
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
+    const alpha = people.sort(function(a,b){
+     let [aLast,aFirst] = a.split(", ");
+     let [bLast,bFirst] = b.split(", ");
+     return aLast > bLast ? -1 : 1;    
+    });
+    console.table(alpha);
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const sumData = data.reduce((total,current)=>{
+      if(!(current in total)){
+        total[current] = 1;
+      }else{
+        total[current]+=1;
+      }
+      return total;
+    },{})
+    console.table(sumData);
   </script>
 </body>
 </html>
